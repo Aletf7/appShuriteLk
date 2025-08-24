@@ -2,13 +2,13 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
   {
-    path: 'alumnos',
+    path: 'students',
     loadComponent: () =>
-      import('./features/alumnos/pages/alumnos-list/alumnos-list.component').then(m => m.AlumnosListComponent)
+      import('./features/alumnos/pages/students-list/students-list.component').then(m => m.StudentsListComponent)
   },
   {
     path: '',
-    redirectTo: 'alumnos',
+    redirectTo: 'students',
     pathMatch: 'full'
   }
 ];
