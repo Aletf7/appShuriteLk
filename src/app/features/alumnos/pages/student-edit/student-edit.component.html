@@ -1,0 +1,34 @@
+<h2>✏️ Editar Perfil del Estudiante</h2>
+
+<form *ngIf="studentForm" [formGroup]="studentForm" (ngSubmit)="submit()" class="edit-form">
+  <mat-form-field appearance="outline">
+    <mat-label>Nombre</mat-label>
+    <input matInput formControlName="name" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Edad</mat-label>
+    <input matInput type="number" formControlName="age" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Cinturón</mat-label>
+    <mat-select formControlName="belt">
+      <mat-option value="White">Blanco</mat-option>
+      <mat-option value="Yellow">Amarillo</mat-option>
+      <mat-option value="Green">Verde</mat-option>
+      <mat-option value="Blue">Azul</mat-option>
+      <mat-option value="Brown">Marrón</mat-option>
+      <mat-option value="Black">Negro</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>URL de la imagen</mat-label>
+    <input matInput formControlName="imageUrl" />
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit" [disabled]="studentForm.invalid">
+    Guardar cambios
+  </button>
+</form>
