@@ -1,0 +1,11 @@
+{
+  "students": [
+    {
+      "id": 2,
+      "name": "Carlos",
+      "age": 22,
+      "belt": "Blue",
+      "imageUrl": "https://example.com/carlos.jpg"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+<div class="card">
+  <img [src]="student.imageUrl" alt="Photo of {{ student.name }}" class="photo" />
+  <div class="info">
+    <h3>{{ student.name }}</h3>
+    <p>Age: {{ student.age }} years</p>
+    <p>Belt: {{ student.belt }}</p>
+  </div>
+  <div class="actions">
+    <button (click)="onEdit()">Edit</button>
+    <button (click)="onDelete()">Delete</button>
+  </div>
+</div>
