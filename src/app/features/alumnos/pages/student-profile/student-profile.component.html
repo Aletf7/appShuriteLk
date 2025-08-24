@@ -1,0 +1,24 @@
+<h2>👤 Perfil del Estudiante</h2>
+
+<mat-card *ngIf="student">
+  <mat-card-header>
+    <mat-card-title>{{ student.name }}</mat-card-title>
+    <mat-card-subtitle>Cinturón: {{ student.belt }}</mat-card-subtitle>
+  </mat-card-header>
+
+  <img mat-card-image [src]="student.imageUrl" alt="{{ student.name }}" />
+
+  <mat-card-content>
+    <p>Edad: {{ student.age }} años</p>
+  </mat-card-content>
+</mat-card>
+
+<h3>🎯 Vídeos recomendados</h3>
+<div class="videos">
+  <mat-card *ngFor="let video of recommendedVideos">
+    <mat-card-title>{{ video.title }}</mat-card-title>
+    <div class="video-wrapper">
+      <iframe [src]="video.videoUrl | safeUrl" frameborder="0" allowfullscreen></iframe>
+    </div>
+  </mat-card>
+</div>
