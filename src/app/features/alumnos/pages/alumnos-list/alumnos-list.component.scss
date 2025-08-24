@@ -1,0 +1,15 @@
+.alumnos-list {
+  padding: 2rem;
+
+  h2 {
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+    color: #333;
+  }
+
+  .cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+}

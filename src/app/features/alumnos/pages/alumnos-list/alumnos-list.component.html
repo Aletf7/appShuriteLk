@@ -1,0 +1,10 @@
+<section class="alumnos-list">
+  <h2>Listado de Alumnos</h2>
+  <div class="cards">
+<app-alumno-card
+  *ngFor="let alumno of alumnos"
+  [alumno]="alumno">
+</app-alumno-card>
+
+  </div>
+</section>
