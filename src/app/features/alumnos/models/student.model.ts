@@ -1,7 +1,7 @@
 export interface Student {
-  id?: number;
-  nombre: string;
-  edad?: number;
-  curso?: string;
-cinturón: string;
+    id: number;
+    name: string;
+    age: number;
+    belt: string;
+    imageUrl: string;
 }

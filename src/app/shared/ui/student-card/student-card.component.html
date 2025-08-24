@@ -1,12 +1,12 @@
 <div class="card">
-  <img [src]="student.imagenUrl" alt="Foto de {{ student.nombre }}" class="foto" />
+  <img [src]="student.imageUrl" alt="Photo of {{ student.name }}" class="photo" />
   <div class="info">
-    <h3>{{ student.nombre }}</h3>
-    <p>Edad: {{ student.edad }} años</p>
-    <p>Cinturón: {{ student.cinturon }}</p>
+    <h3>{{ student.name }}</h3>
+    <p>Age: {{ student.age }} years</p>
+    <p>Belt: {{ student.belt }}</p>
   </div>
-  <div class="acciones">
-    <button (click)="editStudent()">Editar</button>
-    <button (click)="deleteStudent()">Eliminar</button>
+  <div class="actions">
+    <button (click)="onEdit()">Edit</button>
+    <button (click)="onDelete()">Delete</button>
   </div>
 </div>

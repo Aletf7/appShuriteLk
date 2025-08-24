@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -10,19 +10,21 @@ import { CommonModule } from '@angular/common';
 })
 export class StudentCardComponent {
   @Input() student!: {
-    nombre: string;
-    edad: number;
-    cinturon: string;
-    imagenUrl: string;
+    id: number;
+    name: string;
+    age: number;
+    belt: string;
+    imageUrl: string;
   };
 
-  editStudent() {
-    console.log('Editar:', this.student.nombre);
-    // Aquí se lanzara un modal o navegar a una vista de edición
+  @Output() edit = new EventEmitter<number>();
+  @Output() delete = new EventEmitter<number>();
+
+  onEdit() {
+    this.edit.emit(this.student.id);
   }
 
-  deleteStudent() {
-    console.log('Eliminar:', this.student.nombre);
-    // Aquí se emitira un evento o llamar a un servicio
+  onDelete() {
+    this.delete.emit(this.student.id);
   }
 }
