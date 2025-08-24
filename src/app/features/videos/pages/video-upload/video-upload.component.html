@@ -1,0 +1,31 @@
+<h2>📤 Subir Kata</h2>
+
+<form [formGroup]="videoForm" (ngSubmit)="submit()" class="upload-form">
+  <mat-form-field appearance="outline">
+    <mat-label>Título del kata</mat-label>
+    <input matInput formControlName="title" placeholder="Ej. Heian Shodan" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Descripción</mat-label>
+    <textarea matInput formControlName="description" rows="3"></textarea>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Nivel</mat-label>
+    <mat-select formControlName="level">
+      <mat-option value="beginner">Principiante</mat-option>
+      <mat-option value="intermediate">Intermedio</mat-option>
+      <mat-option value="advanced">Avanzado</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>URL del vídeo</mat-label>
+    <input matInput formControlName="videoUrl" placeholder="https://..." />
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit" [disabled]="videoForm.invalid">
+    Subir vídeo
+  </button>
+</form>
