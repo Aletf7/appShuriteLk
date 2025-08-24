@@ -1,0 +1,21 @@
+<h2>🎥 Galería de Katas</h2>
+
+<div class="gallery">
+  <mat-card *ngFor="let video of videos" class="video-card">
+    <mat-card-header>
+      <mat-card-title>{{ video.title }}</mat-card-title>
+      <mat-card-subtitle>{{ video.level | titlecase }}</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <p>{{ video.description }}</p>
+      <div class="video-wrapper">
+        <iframe
+          [src]="video.videoUrl | safeUrl"
+          frameborder="0"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
