@@ -1,11 +1,66 @@
-<section class="students-list">
-  <h2>Student List</h2>
-  <div class="cards">
-    <app-student-card
-      *ngFor="let student of students$ | async"
-      [student]="student"
-      (edit)="editStudent($event)"
-      (delete)="deleteStudent($event)">
-    </app-student-card>
-  </div>
-</section>
+<h2>👨‍🎓 Listado de Estudiantes</h2>
+
+<mat-form-field appearance="outline" style="width: 100%; margin-bottom: 1rem">
+  <mat-label>Filtrar por centro</mat-label>
+  <mat-select
+    [(value)]="centroSeleccionado"
+    (selectionChange)="applyCombinedFilter()"
+  >
+    <mat-option *ngFor="let centro of centros" [value]="centro">{{
+      centro
+    }}</mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field appearance="outline" style="width: 100%; margin-bottom: 1rem">
+  <mat-label>Buscar por nombre</mat-label>
+  <input
+    matInput
+    [(ngModel)]="nombreFiltro"
+    (keyup)="applyCombinedFilter()"
+    placeholder="Ej. Carlos"
+  />
+</mat-form-field>
+<div *ngIf="nombreFiltro || centroSeleccionado" style="display: flex; justify-content: flex-end; margin-bottom: 1rem;">
+  <button mat-stroked-button color="warn" (click)="limpiarFiltros()">🧹 Limpiar filtros</button>
+</div>
+
+
+
+<mat-table *ngIf="isAdmin" [dataSource]="dataSource" class="mat-elevation-z2">
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef>Nombre</mat-header-cell>
+    <mat-cell *matCellDef="let student">{{ student.name }}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="age">
+    <mat-header-cell *matHeaderCellDef>Edad</mat-header-cell>
+    <mat-cell *matCellDef="let student">{{ student.age }} años</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="belt">
+    <mat-header-cell *matHeaderCellDef>Cinturón</mat-header-cell>
+    <mat-cell *matCellDef="let student">{{ student.belt }}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell>
+    <mat-cell *matCellDef="let student">
+      <button mat-button color="primary" (click)="editStudent(student.id)">
+        ✏️ Editar
+      </button>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+</mat-table>
+
+<mat-paginator
+  [pageSizeOptions]="[5, 10, 20]"
+  showFirstLastButtons
+  aria-label="Selector de página"
+>
+</mat-paginator>
+
+<p *ngIf="!isAdmin">🚫 No tienes permisos para ver esta sección.</p>

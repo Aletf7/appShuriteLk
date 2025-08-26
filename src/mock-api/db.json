@@ -1,11 +1,36 @@
 {
   "students": [
     {
+      "id": 1,
+      "name": "Pepe",
+      "age": 20,
+      "belt": "Blue",
+      "centro": "Colegio San Miguel",
+      "imageUrl": "https://thafd.bing.com/th/id/OIP.NRgJJNrJhlvqRpWFwurtHQHaHa?w=171&h=182&c=7&r=0&o=5&pid=1.7"
+    },
+    {
       "id": 2,
       "name": "Carlos",
       "age": 22,
       "belt": "Blue",
-      "imageUrl": "https://example.com/carlos.jpg"
+      "centro": "Colegio San Miguel",
+      "imageUrl": "https://thafd.bing.com/th/id/OIP.NRgJJNrJhlvqRpWFwurtHQHaHa?w=171&h=182&c=7&r=0&o=5&pid=1.7"
+    },
+    {
+      "id": 3,
+      "name": "Juan",
+      "age": 22,
+      "belt": "White",
+      "centro": "Colegio María Antoñeta",
+      "imageUrl": "https://thafd.bing.com/th/id/OIP.NRgJJNrJhlvqRpWFwurtHQHaHa?w=171&h=182&c=7&r=0&o=5&pid=1.7"
+    },
+    {
+      "id": 4,
+      "name": "Carlos",
+      "age": 22,
+      "belt": "Red",
+      "centro": "Colegio María Antoñeta",
+      "imageUrl": "https://thafd.bing.com/th/id/OIP.NRgJJNrJhlvqRpWFwurtHQHaHa?w=171&h=182&c=7&r=0&o=5&pid=1.7"
     }
   ]
 }
