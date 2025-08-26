@@ -1,34 +1,109 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Student } from '../../models/student.model';
-import { StudentsService } from '../../services/students.service';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { StudentCardComponent } from 'src/app/shared/ui/student-card/student-card.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { RouterModule, Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { MatTableDataSource } from '@angular/material/table';
+import { AuthService } from 'src/app/core/auth/services/auth.service';
+import { MatOption, MatSelect } from '@angular/material/select';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-students-list',
   standalone: true,
-  imports: [CommonModule, StudentCardComponent],
+  imports: [
+    CommonModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatSnackBarModule,
+    RouterModule,
+    MatSelect,
+    MatOption,
+    FormsModule,
+  ],
   templateUrl: './students-list.component.html',
-  styleUrls: ['./students-list.component.scss']
+  styleUrls: ['./students-list.component.scss'],
 })
 export class StudentsListComponent implements OnInit {
-  students$!: Observable<Student[]>;
+  displayedColumns: string[] = ['name', 'age', 'belt', 'actions'];
+  dataSource = new MatTableDataSource<any>([]);
+  isAdmin = false;
+  centros: string[] = ['Colegio San Miguel', 'Colegio María Antoñeta'];
+  nombreFiltro: string = '';
+  centroSeleccionado: string = '';
 
-  constructor(private studentsService: StudentsService) {}
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private auth: AuthService,
+    private snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {
-    this.students$ = this.studentsService.getStudents();
+    this.isAdmin = this.auth.getRole() === 'admin';
+
+    if (this.isAdmin) {
+      this.http
+        .get<any[]>('http://localhost:3000/students')
+        .subscribe((data) => {
+          this.dataSource.data = data;
+          this.dataSource.paginator = this.paginator;
+
+          // Filtro combinado: nombre + centro
+          this.dataSource.filterPredicate = (student, filter) => {
+            const { nombre, centro } = JSON.parse(filter);
+            const nombreMatch = student.name.toLowerCase().includes(nombre);
+            const centroMatch = centro
+              ? student.centro?.toLowerCase().includes(centro)
+              : true;
+            return nombreMatch && centroMatch;
+          };
+        });
+    }
+  }
+
+  applyFilter(event: Event): void {
+    const filterValue = (event.target as HTMLInputElement).value
+      .trim()
+      .toLowerCase();
+    this.dataSource.filter = filterValue;
   }
 
   editStudent(id: number): void {
-    // You can add routing or modal logic here
-    console.log(`Editing student with ID: ${id}`);
+    this.router.navigate([`/students/${id}/edit`]);
   }
+  centerFilter(): void {
+    const centro = this.centroSeleccionado.toLowerCase();
+    this.dataSource.filterPredicate = (student, filter) =>
+      student.centro?.toLowerCase().includes(filter);
+    this.dataSource.filter = centro;
+  }
+  applyCombinedFilter(): void {
+    const filtro = {
+      nombre: this.nombreFiltro.trim().toLowerCase(),
+      centro: this.centroSeleccionado.trim().toLowerCase(),
+    };
+    this.dataSource.filter = JSON.stringify(filtro);
+  }
+  limpiarFiltros(): void {
+    this.nombreFiltro = '';
+    this.centroSeleccionado = '';
+    this.applyCombinedFilter();
 
-  deleteStudent(id: number): void {
-    this.studentsService.deleteStudent(id).subscribe(() => {
-      this.students$ = this.studentsService.getStudents(); // Refresh list
+    this.snackBar.open('Filtros reiniciados', 'Cerrar', {
+      duration: 3000,
+      horizontalPosition: 'end',
+      verticalPosition: 'top',
     });
   }
 }

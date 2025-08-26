@@ -29,6 +29,9 @@ export class AuthService {
   getUser(): User | null {
     return this.currentUser();
   }
+  getUserName(): string | null {
+  return this.currentUser?.name ?? null;
+}
 
   isAuthenticated(): boolean {
     return this.currentUser() !== null;

@@ -9,16 +9,19 @@ import { StudentProfileComponent } from './features/alumnos/pages/student-profil
 import { StudentEditComponent } from './features/alumnos/pages/student-edit/student-edit.component';
 import { authGuard } from './core/auth/guard/auth.guard';
 import { UnauthorizedComponent } from './features/auth/unauthorized/unauthorized.component';
+import { LoginPage } from './features/auth/pages/login/login.component';
+import { roleGuard } from './core/auth/guard/role.guard';
 
 export const routes: Routes = [
-  { path: 'students', component: StudentsListComponent },
-  { path: 'videos', component: VideosListComponent  },
-  { path: 'admin', component: AdminPanelComponent },
-  { path: 'clases', component: ClassListComponent},
-  { path: 'admin/upload', component: VideoUploadPage },
-  { path: 'videos/gallery', component: VideosGalleryPage },
-  { path: 'students/:id', component: StudentProfileComponent },
-  { path: 'students/:id/edit', component: StudentEditComponent, canActivate: [authGuard] },
+  { path: 'login', component: LoginPage },
+  { path: 'students', component: StudentsListComponent, canActivate: [roleGuard(['admin'])] },
+  { path: 'videos', component: VideosListComponent,canActivate: [roleGuard(['admin', 'student'])]  },
+  { path: 'admin', component: AdminPanelComponent, canActivate: [roleGuard(['admin'])] },
+  { path: 'clases', component: ClassListComponent, canActivate: [roleGuard(['admin'])]},
+  { path: 'admin/upload', component: VideoUploadPage, canActivate: [roleGuard(['admin'])] },
+  { path: 'videos/gallery', component: VideosGalleryPage, canActivate: [roleGuard(['admin'])] },
+  { path: 'students/:id', component: StudentProfileComponent, canActivate: [roleGuard(['admin'])] },
+  { path: 'students/:id/edit', component: StudentEditComponent, canActivate: [roleGuard(['admin'])] },
   { path: 'unauthorized', component: UnauthorizedComponent },
   { path: '', redirectTo: 'students', pathMatch: 'full' },
   { path: '**', redirectTo: 'students' } // Fallback para rutas no válidas

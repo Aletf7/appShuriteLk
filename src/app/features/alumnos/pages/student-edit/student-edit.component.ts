@@ -1,7 +1,12 @@
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  ReactiveFormsModule,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -18,10 +23,10 @@ import { MatButtonModule } from '@angular/material/button';
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    MatButtonModule
+    MatButtonModule,
   ],
   templateUrl: './student-edit.component.html',
-  styleUrls: ['./student-edit.component.scss']
+  styleUrls: ['./student-edit.component.scss'],
 })
 export class StudentEditComponent {
   private route = inject(ActivatedRoute);
@@ -32,14 +37,18 @@ export class StudentEditComponent {
   studentForm!: FormGroup;
 
   ngOnInit() {
-    this.http.get(`/students/${this.studentId}`).subscribe((student: any) => {
-      this.studentForm = this.fb.group({
-        name: [student.name, Validators.required],
-        age: [student.age, [Validators.required, Validators.min(1)]],
-        belt: [student.belt, Validators.required],
-        imageUrl: [student.imageUrl, Validators.required]
+    const API_BASE = 'http://localhost:3000';
+
+    this.http
+      .get(`${API_BASE}/students/${this.studentId}`)
+      .subscribe((student: any) => {
+        this.studentForm = this.fb.group({
+          name: [student.name, Validators.required],
+          age: [student.age, [Validators.required, Validators.min(1)]],
+          belt: [student.belt, Validators.required],
+          imageUrl: [student.imageUrl, Validators.required],
+        });
       });
-    });
   }
 
   submit(): void {
