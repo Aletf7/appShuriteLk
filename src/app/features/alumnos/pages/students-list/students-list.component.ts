@@ -37,12 +37,14 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrls: ['./students-list.component.scss'],
 })
 export class StudentsListComponent implements OnInit {
-  displayedColumns: string[] = ['name', 'age', 'belt', 'actions'];
+  displayedColumns: string[] = ['name', 'age', 'belt', 'visto', 'actions'];
+
   dataSource = new MatTableDataSource<any>([]);
   isAdmin = false;
   centros: string[] = ['Colegio San Miguel', 'Colegio María Antoñeta'];
   nombreFiltro: string = '';
   centroSeleccionado: string = '';
+  videoId: number = 5; // Puedes cambiarlo dinámicamente si lo necesitas
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -87,12 +89,18 @@ export class StudentsListComponent implements OnInit {
   editStudent(id: number): void {
     this.router.navigate([`/students/${id}/edit`]);
   }
+
+  hasSeenVideo(student: any): boolean {
+    return student.videosVistos?.includes(this.videoId);
+  }
+
   centerFilter(): void {
     const centro = this.centroSeleccionado.toLowerCase();
     this.dataSource.filterPredicate = (student, filter) =>
       student.centro?.toLowerCase().includes(filter);
     this.dataSource.filter = centro;
   }
+
   applyCombinedFilter(): void {
     const filtro = {
       nombre: this.nombreFiltro.trim().toLowerCase(),
@@ -100,6 +108,7 @@ export class StudentsListComponent implements OnInit {
     };
     this.dataSource.filter = JSON.stringify(filtro);
   }
+
   limpiarFiltros(): void {
     this.nombreFiltro = '';
     this.centroSeleccionado = '';
@@ -111,6 +120,7 @@ export class StudentsListComponent implements OnInit {
       verticalPosition: 'top',
     });
   }
+
   deleteUser(id: number): void {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       data: {

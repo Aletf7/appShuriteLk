@@ -46,6 +46,15 @@
     <mat-cell *matCellDef="let student">{{ student.belt }}</mat-cell>
   </ng-container>
 
+  <ng-container matColumnDef="visto">
+    <mat-header-cell *matHeaderCellDef>¿Visto?</mat-header-cell>
+    <mat-cell *matCellDef="let student">
+      <mat-icon [style.color]="hasSeenVideo(student) ? 'green' : 'gray'">
+        {{ hasSeenVideo(student) ? "check_circle" : "cancel" }}
+      </mat-icon>
+    </mat-cell>
+  </ng-container>
+
   <ng-container matColumnDef="actions">
     <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell>
     <mat-cell *matCellDef="let student">

@@ -1,17 +1,40 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #sidenav [mode]="isMobile ? 'over' : 'side'" [opened]="!isMobile" class="sidenav">
+  <mat-sidenav
+    #sidenav
+    [mode]="isMobile ? 'over' : 'side'"
+    [opened]="!isMobile"
+    class="sidenav"
+  >
     <mat-nav-list>
       <!-- <a mat-list-item routerLink="/students" routerLinkActive="active" (click)="isMobile && sidenav.close()">👨‍🎓 Students</a> -->
-      <a mat-list-item routerLink="/videos/gallery" routerLinkActive="active" (click)="isMobile && sidenav.close()">🎥 Katas</a>
-      <a mat-list-item routerLink="/clases" routerLinkActive="active" (click)="isMobile && sidenav.close()">🎯 Clases</a>
+      <a
+        mat-list-item
+        routerLink="/videos/gallery"
+        routerLinkActive="active"
+        (click)="isMobile && sidenav.close()"
+        >🎥 Katas</a
+      >
+      <a
+        mat-list-item
+        routerLink="/clases"
+        routerLinkActive="active"
+        (click)="isMobile && sidenav.close()"
+        >🎯 Clases</a
+      >
 
       <ng-container *ngIf="role() === 'admin'">
-        <a mat-list-item routerLink="/admin" routerLinkActive="active" (click)="isMobile && sidenav.close()">🛠️ Admin</a>
+        <a
+          mat-list-item
+          routerLink="/admin"
+          routerLinkActive="active"
+          (click)="isMobile && sidenav.close()"
+          >🛠️ Admin</a
+        >
         <!-- <a mat-list-item routerLink="/admin/upload" routerLinkActive="active" (click)="isMobile && sidenav.close()">🎥 Upload</a> -->
       </ng-container>
-        <mat-divider></mat-divider>
+      <mat-divider></mat-divider>
 
-  <a mat-list-item (click)="logout()">🚪 Cerrar sesión</a>
+      <a mat-list-item (click)="logout()">🚪 Cerrar sesión</a>
     </mat-nav-list>
   </mat-sidenav>
 
@@ -20,7 +43,9 @@
       <button *ngIf="isMobile" mat-icon-button (click)="sidenav.toggle()">
         <mat-icon>menu</mat-icon>
       </button>
-      <span>Shurite LK</span>
+      <div class="logo-container">
+        <img src="assets/logo.png" alt="Logo ShuriteLK" class="logo" />
+      </div>
     </mat-toolbar>
 
     <div class="main-content">

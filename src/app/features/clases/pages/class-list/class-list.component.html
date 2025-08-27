@@ -1,16 +1,28 @@
 <h2>🎯 Clases disponibles para cinturón {{ userBelt | titlecase }}</h2>
 
-<div class="video-grid">
-  <mat-card *ngFor="let video of videos" class="video-card">
+<div *ngIf="videos.length > 0; else noVideos">
+  <mat-card *ngFor="let video of videos" style="margin-bottom: 1.5rem;">
     <mat-card-header>
       <mat-card-title>{{ video.title }}</mat-card-title>
-      <mat-card-subtitle>Cinturón: {{ video.belt }}</mat-card-subtitle>
+      <mat-card-subtitle>Cinturón: {{ video.belt | titlecase }}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
       <p>{{ video.description }}</p>
+      <video width="100%" controls>
+        <source [src]="video.url" type="video/mp4" />
+        Tu navegador no soporta el vídeo.
+      </video>
     </mat-card-content>
-    <mat-card-actions>
-      <a mat-button color="primary" [href]="video.url" target="_blank">Ver vídeo</a>
-    </mat-card-actions>
   </mat-card>
 </div>
+
+<ng-template #noVideos>
+  <mat-card>
+    <mat-card-content>
+      <p style="text-align: center; font-size: 1.1rem;">
+        💤 No hay vídeos disponibles para tu nivel aún.<br />
+        ¡Vuelve pronto, estamos subiendo contenido nuevo!
+      </p>
+    </mat-card-content>
+  </mat-card>
+</ng-template>

@@ -7,22 +7,14 @@ import { AuthService } from 'src/app/core/auth/services/auth.service';
 
 @Component({
   selector: 'app-class-list',
+  standalone: true,
   imports: [CommonModule, HttpClientModule, MatCardModule],
   templateUrl: './class-list.component.html',
-  styleUrl: './class-list.component.scss',
+  styleUrls: ['./class-list.component.scss'],
 })
 export class ClassListComponent implements OnInit {
-  videos: any[] = [];
+  videos: Video[] = [];
   userBelt: string = '';
-  beltHierarchy = [
-    'blanco',
-    'amarillo',
-    'naranja',
-    'verde',
-    'azul',
-    'marrón',
-    'negro',
-  ];
 
   constructor(private http: HttpClient, private auth: AuthService) {}
 
@@ -30,14 +22,8 @@ export class ClassListComponent implements OnInit {
     const user = this.auth.getUser();
     this.userBelt = user?.belt ?? 'blanco';
 
-    this.http.get<Video[]>('mock-api/db.json').subscribe((data) => {
-      this.videos = data.filter((video) => this.puedeVer(video.belt));
+    this.http.get<Video[]>('http://localhost:3000/videos').subscribe((data) => {
+      this.videos = data.filter((video) => video.belt.toLowerCase() === this.userBelt.toLowerCase());
     });
-  }
-
-  puedeVer(belt: string): boolean {
-    const userIndex = this.beltHierarchy.indexOf(this.userBelt.toLowerCase());
-    const videoIndex = this.beltHierarchy.indexOf(belt.toLowerCase());
-    return videoIndex <= userIndex;
   }
 }
