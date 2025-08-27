@@ -12,6 +12,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-student-edit-page',
@@ -21,6 +22,7 @@ import { MatButtonModule } from '@angular/material/button';
     ReactiveFormsModule,
     HttpClientModule,
     MatFormFieldModule,
+    MatIconModule,
     MatInputModule,
     MatSelectModule,
     MatButtonModule,
@@ -35,6 +37,8 @@ export class StudentEditComponent {
 
   studentId = this.route.snapshot.params['id'];
   studentForm!: FormGroup;
+  previewUrl: string | null = null;
+  selectedFile: File | null = null;
 
   ngOnInit() {
     const API_BASE = 'http://localhost:3000';
@@ -46,13 +50,35 @@ export class StudentEditComponent {
           name: [student.name, Validators.required],
           age: [student.age, [Validators.required, Validators.min(1)]],
           belt: [student.belt, Validators.required],
-          imageUrl: [student.imageUrl, Validators.required],
+          imageUrl: [student.imageUrl],
         });
       });
   }
+  
+  onFileChange(event: any): void {
+    const file = event.target.files[0];
+    if (file) {
+      this.selectedFile = file;
+      this.previewUrl = URL.createObjectURL(file);
+    }
+  }
 
   submit(): void {
-    console.log('Datos actualizados:', this.studentForm.value);
-    // Aquí luego se conectará con el backend para guardar los cambios
+    const API_BASE = 'http://localhost:3000';
+
+    if (this.studentForm.valid) {
+      const studentData = {
+        ...this.studentForm.value,
+        imageUrl: this.selectedFile
+          ? 'assets/images/' + this.selectedFile.name
+          : this.studentForm.value.imageUrl,
+      };
+
+      this.http
+        .put(`${API_BASE}/students/${this.studentId}`, studentData)
+        .subscribe(() => {
+          alert('Estudiante actualizado correctamente');
+        });
+    }
   }
 }

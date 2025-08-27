@@ -1,12 +1,11 @@
 {
   "students": [
     {
-      "id": 1,
       "name": "Pepe",
       "age": 20,
       "belt": "Blue",
-      "centro": "Colegio San Miguel",
-      "imageUrl": "https://thafd.bing.com/th/id/OIP.NRgJJNrJhlvqRpWFwurtHQHaHa?w=171&h=182&c=7&r=0&o=5&pid=1.7"
+      "imageUrl": "assets/images/il_fullxfull.4480944190_9n3l.avif",
+      "id": 1
     },
     {
       "id": 2,
@@ -31,6 +30,14 @@
       "belt": "Red",
       "centro": "Colegio María Antoñeta",
       "imageUrl": "https://thafd.bing.com/th/id/OIP.NRgJJNrJhlvqRpWFwurtHQHaHa?w=171&h=182&c=7&r=0&o=5&pid=1.7"
+    },
+    {
+      "username": "asdasd",
+      "name": "asdasd",
+      "role": "student",
+      "belt": "blanco",
+      "centro": "LutherKing",
+      "id": 5
     }
   ],
   "videos": [

@@ -21,7 +21,7 @@ export const routes: Routes = [
   { path: 'admin', component: AdminPanelComponent, canActivate: [roleGuard(['admin'])] },
   { path: 'clases', component: ClassListComponent, canActivate: [roleGuard(['admin'])]},
   { path: 'admin/upload', component: VideoUploadPage, canActivate: [roleGuard(['admin'])] },
-  { path: 'videos/gallery', component: VideosGalleryPage, canActivate: [roleGuard(['admin'])] },
+  { path: 'videos/gallery', component: VideosGalleryPage, canActivate: [roleGuard(['admin', 'stundent'])] },
   { path: 'students/:id', component: StudentProfileComponent, canActivate: [roleGuard(['admin'])] },
   { path: 'students/:id/edit', component: StudentEditComponent, canActivate: [roleGuard(['admin'])] },
   { path: 'unauthorized', component: UnauthorizedComponent },

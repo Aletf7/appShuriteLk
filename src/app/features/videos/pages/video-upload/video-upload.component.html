@@ -1,4 +1,4 @@
-<h2>📤 Subir nuevo vídeo</h2>
+<h2>{{ editMode ? '✏️ Editar vídeo' : '📤 Subir nuevo vídeo' }}</h2>
 
 <form [formGroup]="uploadForm" (ngSubmit)="submit()" style="margin-bottom: 2rem;">
   <mat-form-field appearance="outline" style="width: 100%;">
@@ -20,7 +20,9 @@
 
   <input type="file" (change)="onFileChange($event)" accept="video/mp4" />
 
-  <button mat-raised-button color="primary" type="submit" style="margin-top: 1rem;">Subir vídeo</button>
+<button mat-raised-button color="primary" type="submit" style="margin-top: 1rem;">
+  {{ editMode ? 'Actualizar vídeo' : 'Subir vídeo' }}
+</button>
 </form>
 
 <h3>🎬 Vídeos subidos</h3>

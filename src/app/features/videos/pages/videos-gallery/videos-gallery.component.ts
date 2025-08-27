@@ -16,7 +16,7 @@ export class VideosGalleryPage {
       title: 'Heian Shodan',
       description: 'Kata básico para principiantes.',
       level: 'beginner',
-      videoUrl: 'https://www.youtube.com/embed/SiIu4VRwf6I',
+      videoUrl: '../../../../assets/videos/video1.mp4',
     },
     {
       title: 'Taikyoku Shodan',
