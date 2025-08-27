@@ -30,7 +30,7 @@ export class ClassListComponent implements OnInit {
     const user = this.auth.getUser();
     this.userBelt = user?.belt ?? 'blanco';
 
-    this.http.get<Video[]>('assets/videos.json').subscribe((data) => {
+    this.http.get<Video[]>('mock-api/db.json').subscribe((data) => {
       this.videos = data.filter((video) => this.puedeVer(video.belt));
     });
   }

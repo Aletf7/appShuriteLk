@@ -14,6 +14,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-video-upload',
@@ -51,6 +52,7 @@ export class VideoUploadPage {
   constructor(
     private fb: FormBuilder,
     private http: HttpClient,
+    private snackBar: MatSnackBar,
     private router: Router
   ) {
     this.uploadForm = this.fb.group({
@@ -91,6 +93,12 @@ export class VideoUploadPage {
         this.uploadedVideos.push(video);
         this.uploadForm.reset();
       });
+      this.snackBar.open(
+  this.editMode ? 'Vídeo actualizado correctamente' : 'Vídeo subido correctamente',
+  'Cerrar',
+  { duration: 3000 }
+);
+
     }
   }
 }

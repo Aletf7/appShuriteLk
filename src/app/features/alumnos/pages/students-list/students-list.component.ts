@@ -12,6 +12,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { AuthService } from 'src/app/core/auth/services/auth.service';
 import { MatOption, MatSelect } from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
+import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-students-list',
@@ -21,6 +24,7 @@ import { FormsModule } from '@angular/forms';
     MatTableModule,
     MatPaginatorModule,
     MatFormFieldModule,
+    MatIconModule,
     MatInputModule,
     MatButtonModule,
     MatSnackBarModule,
@@ -46,7 +50,8 @@ export class StudentsListComponent implements OnInit {
     private http: HttpClient,
     private router: Router,
     private auth: AuthService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -104,6 +109,24 @@ export class StudentsListComponent implements OnInit {
       duration: 3000,
       horizontalPosition: 'end',
       verticalPosition: 'top',
+    });
+  }
+  deleteUser(id: number): void {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: '¿Eliminar usuario?',
+        message: '¿Seguro que quieres eliminar este usuario del sistema?',
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.http.delete(`http://localhost:3000/users/${id}`).subscribe(() => {
+          this.snackBar.open('Usuario eliminado correctamente', 'Cerrar', {
+            duration: 3000,
+          });
+        });
+      }
     });
   }
 }
