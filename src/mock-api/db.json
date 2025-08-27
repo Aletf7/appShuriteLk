@@ -5,7 +5,8 @@
       "age": 20,
       "belt": "Blue",
       "imageUrl": "assets/images/il_fullxfull.4480944190_9n3l.avif",
-      "id": 1
+      "id": 1,
+      "videosVistos": [3, 5, 7]
     },
     {
       "id": 2,
@@ -13,6 +14,7 @@
       "age": 22,
       "belt": "Blue",
       "centro": "Colegio San Miguel",
+      "videosVistos": [3],
       "imageUrl": "https://thafd.bing.com/th/id/OIP.NRgJJNrJhlvqRpWFwurtHQHaHa?w=171&h=182&c=7&r=0&o=5&pid=1.7"
     },
     {
@@ -21,6 +23,7 @@
       "age": 22,
       "belt": "White",
       "centro": "Colegio María Antoñeta",
+      "videosVistos": [7],
       "imageUrl": "https://thafd.bing.com/th/id/OIP.NRgJJNrJhlvqRpWFwurtHQHaHa?w=171&h=182&c=7&r=0&o=5&pid=1.7"
     },
     {
@@ -29,6 +32,7 @@
       "age": 22,
       "belt": "Red",
       "centro": "Colegio María Antoñeta",
+      "videosVistos": [1],
       "imageUrl": "https://thafd.bing.com/th/id/OIP.NRgJJNrJhlvqRpWFwurtHQHaHa?w=171&h=182&c=7&r=0&o=5&pid=1.7"
     },
     {
@@ -46,6 +50,7 @@
       "title": "Kata básico",
       "description": "Técnica inicial para cinturón blanco",
       "belt": "blanco",
+      "level": "basic",
       "url": "assets/videos/video1.mp4"
     },
     {
@@ -53,12 +58,14 @@
       "title": "Defensa azul",
       "description": "Defensa para nivel azul",
       "belt": "azul",
+      "level": "intermediate",
       "url": "assets/videos/video2.mp4"
     },
     {
       "title": "video3",
       "description": "katas avanzados",
       "belt": "naranja",
+      "level": "intermediate",
       "url": "assets/videos/video3.mp4",
       "id": 3
     },
@@ -66,6 +73,7 @@
       "title": "asdasd",
       "description": "asdasd",
       "belt": "negro",
+      "level": "advanced",
       "url": "assets/videos/video1.mp4",
       "id": 4
     }

@@ -13,3 +13,26 @@
     gap: 1rem;
   }
 }
+::ng-deep .mat-header-cell {
+  color: #1976d2; // Azul del tema primario (puedes ajustarlo si usas otro tono)
+  font-weight: bold;
+}
+
+::ng-deep .mat-header-row {
+  background-color: #f5faff; // Un azul muy suave de fondo para destacar
+}
+::ng-deep .mat-row:hover {
+  background-color: #e3f2fd; // Azul claro al pasar el mouse
+  transition: background-color 0.3s ease;
+}
+::ng-deep .mat-icon-button:hover mat-icon {
+  color: #1565c0; // Azul más intenso al hacer hover
+  transition: color 0.3s ease;
+}
+::ng-deep .mat-icon-button {
+  transition: transform 0.2s ease;
+}
+
+::ng-deep .mat-icon-button:hover {
+  transform: scale(1.1);
+}

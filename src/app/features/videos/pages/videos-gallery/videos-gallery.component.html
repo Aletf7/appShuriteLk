@@ -1,21 +1,49 @@
-<h2>🎥 Galería de Katas</h2>
+<h2>🎥 Katas disponibles para nivel {{ userLevel | titlecase }}</h2>
 
-<div class="gallery">
-  <mat-card *ngFor="let video of videos" class="video-card">
+<button mat-button (click)="toggleInferiores()" color="primary" style="margin-bottom: 1rem;">
+  {{ mostrarInferiores ? '🔒 Ver solo mi nivel' : '🔓 Ver también niveles inferiores' }}
+</button>
+
+<div *ngIf="videos.length > 0; else noVideos">
+  <mat-card *ngFor="let video of videos" style="margin-bottom: 1.5rem;">
     <mat-card-header>
       <mat-card-title>{{ video.title }}</mat-card-title>
-      <mat-card-subtitle>{{ video.level | titlecase }}</mat-card-subtitle>
+      <mat-card-subtitle>
+        Nivel: {{ video.level | titlecase }}
+        <span *ngIf="haVisto(video.id)" style="color: green;">✅ Visto</span>
+      </mat-card-subtitle>
     </mat-card-header>
-
     <mat-card-content>
       <p>{{ video.description }}</p>
-      <div class="video-wrapper">
+
+      <ng-container *ngIf="video.url.endsWith('.mp4'); else embedVideo">
+        <video width="100%" controls (play)="onVideoPlayed(video.id)">
+          <source [src]="video.url | safeUrl" type="video/mp4" />
+          Tu navegador no soporta el vídeo.
+        </video>
+      </ng-container>
+
+      <ng-template #embedVideo>
         <iframe
-          [src]="video.videoUrl | safeUrl"
+          [src]="video.url | safeUrl"
+          width="100%"
+          height="315"
           frameborder="0"
           allowfullscreen
+          (load)="onVideoPlayed(video.id)"
         ></iframe>
-      </div>
+      </ng-template>
     </mat-card-content>
   </mat-card>
 </div>
+
+<ng-template #noVideos>
+  <mat-card>
+    <mat-card-content>
+      <p style="text-align: center; font-size: 1.1rem;">
+        💤 No hay vídeos disponibles para tu nivel aún.<br />
+        ¡Vuelve pronto, estamos subiendo contenido nuevo!
+      </p>
+    </mat-card-content>
+  </mat-card>
+</ng-template>
