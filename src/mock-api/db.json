@@ -32,5 +32,35 @@
       "centro": "Colegio María Antoñeta",
       "imageUrl": "https://thafd.bing.com/th/id/OIP.NRgJJNrJhlvqRpWFwurtHQHaHa?w=171&h=182&c=7&r=0&o=5&pid=1.7"
     }
+  ],
+  "videos": [
+    {
+      "id": 1,
+      "title": "Kata básico",
+      "description": "Técnica inicial para cinturón blanco",
+      "belt": "blanco",
+      "url": "assets/videos/video1.mp4"
+    },
+    {
+      "id": 2,
+      "title": "Defensa azul",
+      "description": "Defensa para nivel azul",
+      "belt": "azul",
+      "url": "assets/videos/video2.mp4"
+    },
+    {
+      "title": "video3",
+      "description": "katas avanzados",
+      "belt": "naranja",
+      "url": "assets/videos/video3.mp4",
+      "id": 3
+    },
+    {
+      "title": "asdasd",
+      "description": "asdasd",
+      "belt": "negro",
+      "url": "assets/videos/video1.mp4",
+      "id": 4
+    }
   ]
 }

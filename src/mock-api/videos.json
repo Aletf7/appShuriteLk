@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "title": "Kata básico",
+    "belt": "blanco",
+    "description": "Técnica inicial para cinturón blanco",
+    "url": "assets/videos/blanco-kata.mp4"
+  },
+  {
+    "id": 2,
+    "title": "Defensa azul",
+    "belt": "azul",
+    "description": "Defensa para nivel azul",
+    "url": "assets/videos/azul-defensa.mp4"
+  }
+]

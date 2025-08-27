@@ -8,36 +8,47 @@ export class AuthService {
   private currentUser = signal<User | null>(null);
 
   login(username: string, password: string): boolean {
-    // Simulación de login
+    // Simulación de login con cinturón incluido
     if (username === 'admin' && password === '1234') {
-      this.currentUser.set({ username, role: 'admin' });
+      this.currentUser.set({ username, role: 'admin', name: 'Administrador', belt: 'negro' });
       return true;
     }
 
     if (username === 'student' && password === '1234') {
-      this.currentUser.set({ username, role: 'student' });
+      this.currentUser.set({ username, role: 'student', name: 'Estudiante', belt: 'blanco' });
       return true;
     }
 
     return false;
   }
 
-  logout() {
+  logout(): void {
     this.currentUser.set(null);
   }
 
+  // ✅ Nuevo método para acceder al signal directamente
+  getCurrentUserSignal() {
+    return this.currentUser;
+  }
+
+  // ✅ Acceso directo al valor actual
   getUser(): User | null {
     return this.currentUser();
   }
-  getUserName(): string | null {
-  return this.currentUser?.name ?? null;
-}
 
-  isAuthenticated(): boolean {
-    return this.currentUser() !== null;
+  getUserName(): string | null {
+    return this.currentUser()?.name ?? null;
   }
 
   getRole(): 'admin' | 'student' | null {
     return this.currentUser()?.role ?? null;
+  }
+
+  getBelt(): string | null {
+    return this.currentUser()?.belt ?? null;
+  }
+
+  isAuthenticated(): boolean {
+    return this.currentUser() !== null;
   }
 }

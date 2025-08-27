@@ -1,0 +1,28 @@
+<h2>🎬 Gestión de vídeos</h2>
+
+<mat-table [dataSource]="videos" class="mat-elevation-z2">
+  <ng-container matColumnDef="title">
+    <mat-header-cell *matHeaderCellDef>Título</mat-header-cell>
+    <mat-cell *matCellDef="let video">{{ video.title }}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="belt">
+    <mat-header-cell *matHeaderCellDef>Cinturón</mat-header-cell>
+    <mat-cell *matCellDef="let video">{{ video.belt }}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell>
+    <mat-cell *matCellDef="let video">
+      <button mat-icon-button color="primary" (click)="editVideo(video.id)">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button color="warn" (click)="deleteVideo(video.id)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
