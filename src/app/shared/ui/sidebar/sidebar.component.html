@@ -1,13 +1,13 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #sidenav [mode]="isMobile ? 'over' : 'side'" [opened]="!isMobile" class="sidenav">
     <mat-nav-list>
-      <a mat-list-item routerLink="/students" routerLinkActive="active" (click)="isMobile && sidenav.close()">👨‍🎓 Students</a>
+      <!-- <a mat-list-item routerLink="/students" routerLinkActive="active" (click)="isMobile && sidenav.close()">👨‍🎓 Students</a> -->
       <a mat-list-item routerLink="/videos" routerLinkActive="active" (click)="isMobile && sidenav.close()">🎥 Katas</a>
       <a mat-list-item routerLink="/clases" routerLinkActive="active" (click)="isMobile && sidenav.close()">🎯 Clases</a>
 
       <ng-container *ngIf="role() === 'admin'">
         <a mat-list-item routerLink="/admin" routerLinkActive="active" (click)="isMobile && sidenav.close()">🛠️ Admin</a>
-        <a mat-list-item routerLink="/admin/upload" routerLinkActive="active" (click)="isMobile && sidenav.close()">🎥 Upload</a>
+        <!-- <a mat-list-item routerLink="/admin/upload" routerLinkActive="active" (click)="isMobile && sidenav.close()">🎥 Upload</a> -->
       </ng-container>
         <mat-divider></mat-divider>
 

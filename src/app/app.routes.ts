@@ -11,10 +11,12 @@ import { authGuard } from './core/auth/guard/auth.guard';
 import { UnauthorizedComponent } from './features/auth/unauthorized/unauthorized.component';
 import { LoginPage } from './features/auth/pages/login/login.component';
 import { roleGuard } from './core/auth/guard/role.guard';
+import { adminRoutes } from './features/admin/admin.routes';
 
 export const routes: Routes = [
   { path: 'login', component: LoginPage },
   { path: 'students', component: StudentsListComponent, canActivate: [roleGuard(['admin'])] },
+  { path: 'admin', children: adminRoutes },
   { path: 'videos', component: VideosListComponent,canActivate: [roleGuard(['admin', 'student'])]  },
   { path: 'admin', component: AdminPanelComponent, canActivate: [roleGuard(['admin'])] },
   { path: 'clases', component: ClassListComponent, canActivate: [roleGuard(['admin'])]},

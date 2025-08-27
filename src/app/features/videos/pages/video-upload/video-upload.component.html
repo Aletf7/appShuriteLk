@@ -1,31 +1,42 @@
-<h2>📤 Subir Kata</h2>
+<h2>📤 Subir nuevo vídeo</h2>
 
-<form [formGroup]="videoForm" (ngSubmit)="submit()" class="upload-form">
-  <mat-form-field appearance="outline">
-    <mat-label>Título del kata</mat-label>
-    <input matInput formControlName="title" placeholder="Ej. Heian Shodan" />
+<form [formGroup]="uploadForm" (ngSubmit)="submit()" style="margin-bottom: 2rem;">
+  <mat-form-field appearance="outline" style="width: 100%;">
+    <mat-label>Título</mat-label>
+    <input matInput formControlName="title" />
   </mat-form-field>
 
-  <mat-form-field appearance="outline">
+  <mat-form-field appearance="outline" style="width: 100%;">
     <mat-label>Descripción</mat-label>
-    <textarea matInput formControlName="description" rows="3"></textarea>
+    <input matInput formControlName="description" />
   </mat-form-field>
 
-  <mat-form-field appearance="outline">
-    <mat-label>Nivel</mat-label>
-    <mat-select formControlName="level">
-      <mat-option value="beginner">Principiante</mat-option>
-      <mat-option value="intermediate">Intermedio</mat-option>
-      <mat-option value="advanced">Avanzado</mat-option>
+  <mat-form-field appearance="outline" style="width: 100%;">
+    <mat-label>Cinturón</mat-label>
+    <mat-select formControlName="belt">
+      <mat-option *ngFor="let belt of beltOptions" [value]="belt">{{ belt | titlecase }}</mat-option>
     </mat-select>
   </mat-form-field>
 
-  <mat-form-field appearance="outline">
-    <mat-label>URL del vídeo</mat-label>
-    <input matInput formControlName="videoUrl" placeholder="https://..." />
-  </mat-form-field>
+  <input type="file" (change)="onFileChange($event)" accept="video/mp4" />
 
-  <button mat-raised-button color="primary" type="submit" [disabled]="videoForm.invalid">
-    Subir vídeo
-  </button>
+  <button mat-raised-button color="primary" type="submit" style="margin-top: 1rem;">Subir vídeo</button>
 </form>
+
+<h3>🎬 Vídeos subidos</h3>
+
+<div *ngFor="let video of uploadedVideos" style="margin-bottom: 2rem;">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>{{ video.title }}</mat-card-title>
+      <mat-card-subtitle>Cinturón: {{ video.belt }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>{{ video.description }}</p>
+      <video width="100%" controls>
+        <source [src]="video.url" type="video/mp4" />
+        Tu navegador no soporta el vídeo.
+      </video>
+    </mat-card-content>
+  </mat-card>
+</div>

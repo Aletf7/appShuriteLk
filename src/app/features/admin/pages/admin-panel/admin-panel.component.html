@@ -1,1 +1,16 @@
-<p>admin-panel works!</p>
+<mat-toolbar color="primary">
+  <span class="titulo">🛠️ Panel de Administración</span>
+</mat-toolbar>
+
+<nav class="admin-nav">
+  <button mat-button routerLink="videos" routerLinkActive="active">🎬 Vídeos</button>
+  <button mat-button routerLink="upload" routerLinkActive="active">📤 Subir vídeo</button>
+  <button mat-button routerLink="students" routerLinkActive="active">👨‍🎓 Estudiantes</button>
+  <button mat-icon-button (click)="logout()" matTooltip="Cerrar sesión">
+    <mat-icon>logout</mat-icon>
+  </button>
+</nav>
+
+<div class="admin-content">
+  <router-outlet></router-outlet>
+</div>
