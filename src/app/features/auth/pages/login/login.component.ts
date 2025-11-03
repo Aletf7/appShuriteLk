@@ -26,4 +26,5 @@ export class LoginPage {
       alert('Credenciales incorrectas');
     }
   }
+  
 }

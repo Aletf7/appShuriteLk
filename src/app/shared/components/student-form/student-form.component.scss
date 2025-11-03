@@ -1,0 +1,52 @@
+.student-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  padding: 2rem;
+
+  mat-form-field {
+    width: 100%;
+  }
+
+  h2, h3 {
+    grid-column: 1 / -1;
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #1976d2; // Azul primario
+  }
+
+  mat-checkbox {
+    grid-column: 1 / -1;
+    margin-bottom: 1rem;
+  }
+
+  button[type="submit"] {
+    grid-column: 1 / -1;
+    justify-self: start;
+    margin-top: 2rem;
+  }
+
+  p {
+    grid-column: 1 / -1;
+    margin-top: 1rem;
+    font-size: 0.95rem;
+
+    a {
+      color: #1976d2;
+      text-decoration: none;
+      font-weight: 500;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+// Responsive para móvil
+@media (max-width: 768px) {
+  .student-form {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,153 @@
+<h2>📝 Registro de Estudiante</h2>
+
+<form [formGroup]="form" (ngSubmit)="submit()" class="student-form">
+  <!-- 🧍 Datos del estudiante -->
+  <mat-form-field appearance="outline">
+    <mat-label>Nombre</mat-label>
+    <input matInput formControlName="nombre" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Apellidos</mat-label>
+    <input matInput formControlName="apellidos" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Fecha de nacimiento</mat-label>
+    <input matInput formControlName="fechaNacimiento" type="date" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>DNI</mat-label>
+    <input matInput formControlName="dni" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Pasaporte</mat-label>
+    <input matInput formControlName="pasaporte" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Teléfono</mat-label>
+    <input matInput formControlName="telefono" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Correo electrónico</mat-label>
+    <input matInput formControlName="correo" type="email" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Club</mat-label>
+    <input matInput formControlName="club" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Identificador</mat-label>
+    <input matInput formControlName="identificador" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Información adicional</mat-label>
+    <textarea matInput formControlName="informacionAdicional"></textarea>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Actividad</mat-label>
+    <input matInput formControlName="actividad" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Nº licencia federativa</mat-label>
+    <input matInput formControlName="licenciaFederativa" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Fotografía</mat-label>
+    <input matInput formControlName="fotografia" type="file" />
+  </mat-form-field>
+
+  <!-- 👶 Menor de edad -->
+  <mat-checkbox formControlName="menorEdad">¿Es menor de edad?</mat-checkbox>
+
+  <!-- 👨‍👩‍👧 Datos del tutor -->
+  <div *ngIf="form.get('menorEdad')?.value" [formGroup]="tutorGroup">
+    <h3>👨‍👩‍👧 Datos del Tutor</h3>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Nombre del tutor</mat-label>
+      <input matInput formControlName="nombre" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Apellidos del tutor</mat-label>
+      <input matInput formControlName="apellidos" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>DNI del tutor</mat-label>
+      <input matInput formControlName="dni" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Teléfono del tutor</mat-label>
+      <input matInput formControlName="telefono" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Correo electrónico del tutor</mat-label>
+      <input matInput formControlName="correo" type="email" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Dirección</mat-label>
+      <input matInput formControlName="direccion" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Población</mat-label>
+      <input matInput formControlName="poblacion" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Código Postal</mat-label>
+      <input matInput formControlName="cp" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Provincia</mat-label>
+      <input matInput formControlName="provincia" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Información adicional</mat-label>
+      <textarea matInput formControlName="informacionAdicional"></textarea>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>NIF/NIE anverso</mat-label>
+      <input matInput formControlName="nifAnverso" type="file" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>NIF/NIE reverso</mat-label>
+      <input matInput formControlName="nifReverso" type="file" />
+    </mat-form-field>
+  </div>
+
+  <!-- 📜 Cláusulas legales -->
+  <h3>📜 Cláusulas legales</h3>
+  <mat-checkbox formControlName="clausula1">Acepto la cláusula 1</mat-checkbox>
+  <mat-checkbox formControlName="clausula2">Acepto la cláusula 2</mat-checkbox>
+  <mat-checkbox formControlName="clausula3">Acepto la cláusula 3</mat-checkbox>
+  <mat-checkbox formControlName="clausula4">Acepto la cláusula 4</mat-checkbox>
+
+  <!-- ✅ Botón de registro -->
+  <button mat-raised-button color="primary" type="submit">Registrarse</button>
+
+  <!-- 🔗 Enlace al login -->
+  <p style="margin-top: 1rem;">
+    ¿Ya tienes una cuenta?
+    <a routerLink="/login">Inicia sesión</a>
+  </p>
+</form>
