@@ -1,84 +1,65 @@
 import { Component, inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import {
-  ReactiveFormsModule,
-  FormBuilder,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { StudentFormComponent } from 'src/app/shared/components/student-form/student-form.component';
 import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
+import { AuthService } from 'src/app/core/auth/services/auth.service';
 
 @Component({
   selector: 'app-student-edit-page',
   standalone: true,
   imports: [
     CommonModule,
-    ReactiveFormsModule,
     HttpClientModule,
-    MatFormFieldModule,
-    MatIconModule,
+    StudentFormComponent,
+    RouterModule,
     MatInputModule,
-    MatSelectModule,
-    MatButtonModule,
   ],
   templateUrl: './student-edit.component.html',
   styleUrls: ['./student-edit.component.scss'],
 })
 export class StudentEditComponent {
+  constructor(private auth: AuthService) {}
   private route = inject(ActivatedRoute);
   private http = inject(HttpClient);
-  private fb = inject(FormBuilder);
 
   studentId = this.route.snapshot.params['id'];
-  studentForm!: FormGroup;
-  previewUrl: string | null = null;
-  selectedFile: File | null = null;
+  initialData: any;
+  isAdmin = false;
+  belts: string[] = [
+    'Blanco',
+    'Amarillo',
+    'Naranja',
+    'Verde',
+    'Azul',
+    'Marrón',
+    'Negro',
+  ];
 
   ngOnInit() {
     const API_BASE = 'http://localhost:3000';
+    this.isAdmin = this.auth.getRole() === 'admin'; // Asegúrate de tener AuthService inyectado
 
     this.http
-      .get(`${API_BASE}/students/${this.studentId}`)
+      .get(`${API_BASE}/users/${this.studentId}`)
       .subscribe((student: any) => {
-        this.studentForm = this.fb.group({
-          name: [student.name, Validators.required],
-          age: [student.age, [Validators.required, Validators.min(1)]],
-          belt: [student.belt, Validators.required],
-          imageUrl: [student.imageUrl],
-        });
+        this.initialData = student;
       });
   }
-  
-  onFileChange(event: any): void {
-    const file = event.target.files[0];
-    if (file) {
-      this.selectedFile = file;
-      this.previewUrl = URL.createObjectURL(file);
-    }
-  }
 
-  submit(): void {
+  onSubmit(updatedData: any): void {
     const API_BASE = 'http://localhost:3000';
 
-    if (this.studentForm.valid) {
-      const studentData = {
-        ...this.studentForm.value,
-        imageUrl: this.selectedFile
-          ? 'assets/images/' + this.selectedFile.name
-          : this.studentForm.value.imageUrl,
-      };
+    const datosCompletos = {
+      ...this.initialData, // conserva todos los campos originales
+      ...updatedData, // actualiza solo los modificados
+    };
 
-      this.http
-        .put(`${API_BASE}/students/${this.studentId}`, studentData)
-        .subscribe(() => {
-          alert('Estudiante actualizado correctamente');
-        });
-    }
+    this.http
+      .put(`${API_BASE}/users/${this.studentId}`, datosCompletos)
+      .subscribe(() => {
+        alert('✅ Estudiante actualizado correctamente');
+      });
   }
 }

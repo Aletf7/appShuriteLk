@@ -15,16 +15,57 @@ import { adminRoutes } from './features/admin/admin.routes';
 
 export const routes: Routes = [
   { path: 'login', component: LoginPage },
-  { path: 'students', component: StudentsListComponent, canActivate: [roleGuard(['admin'])] },
+  {
+    path: 'students',
+    component: StudentsListComponent,
+    canActivate: [roleGuard(['admin'])],
+  },
   { path: 'admin', children: adminRoutes },
-  { path: 'videos', component: VideosListComponent,canActivate: [roleGuard(['admin', 'student'])]  },
-  { path: 'admin', component: AdminPanelComponent, canActivate: [roleGuard(['admin'])] },
-  { path: 'clases', component: ClassListComponent, canActivate: [roleGuard(['admin'])]},
-  { path: 'admin/upload', component: VideoUploadPage, canActivate: [roleGuard(['admin'])] },
-  { path: 'videos/gallery', component: VideosGalleryPage, canActivate: [roleGuard(['admin', 'stundent'])] },
-  { path: 'students/:id', component: StudentProfileComponent, canActivate: [roleGuard(['admin'])] },
-  { path: 'students/:id/edit', component: StudentEditComponent, canActivate: [roleGuard(['admin'])] },
+  {
+    path: 'videos',
+    component: VideosListComponent,
+    canActivate: [roleGuard(['admin', 'student'])],
+  },
+  {
+    path: 'admin',
+    component: AdminPanelComponent,
+    canActivate: [roleGuard(['admin'])],
+  },
+  {
+    path: 'clases',
+    component: ClassListComponent,
+    canActivate: [roleGuard(['admin'])],
+  },
+  {
+    path: 'admin/upload',
+    component: VideoUploadPage,
+    canActivate: [roleGuard(['admin'])],
+  },
+  {
+    path: 'videos/gallery',
+    component: VideosGalleryPage,
+    canActivate: [roleGuard(['admin', 'stundent'])],
+  },
+  {
+    path: 'students/:id',
+    component: StudentProfileComponent,
+    canActivate: [roleGuard(['admin'])],
+  },
+  {
+    path: 'students/:id/edit',
+    component: StudentEditComponent,
+    canActivate: [roleGuard(['admin'])],
+  },
+  { path: 'login', component: LoginPage },
+  {
+    path: 'register',
+    loadComponent: () =>
+      import('./features/auth/pages/register/register.component').then(
+        (m) => m.RegisterComponent
+      ),
+  },
+
   { path: 'unauthorized', component: UnauthorizedComponent },
   { path: '', redirectTo: 'students', pathMatch: 'full' },
-  { path: '**', redirectTo: 'students' } // Fallback para rutas no válidas
+  { path: '**', redirectTo: 'students' }, // Fallback para rutas no válidas
 ];

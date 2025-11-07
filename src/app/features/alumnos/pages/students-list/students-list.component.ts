@@ -60,22 +60,20 @@ export class StudentsListComponent implements OnInit {
     this.isAdmin = this.auth.getRole() === 'admin';
 
     if (this.isAdmin) {
-      this.http
-        .get<any[]>('http://localhost:3000/students')
-        .subscribe((data) => {
-          this.dataSource.data = data;
-          this.dataSource.paginator = this.paginator;
+      this.http.get<any[]>('http://localhost:3000/users').subscribe((data) => {
+        this.dataSource.data = data;
+        this.dataSource.paginator = this.paginator;
 
-          // Filtro combinado: nombre + centro
-          this.dataSource.filterPredicate = (student, filter) => {
-            const { nombre, centro } = JSON.parse(filter);
-            const nombreMatch = student.name.toLowerCase().includes(nombre);
-            const centroMatch = centro
-              ? student.centro?.toLowerCase().includes(centro)
-              : true;
-            return nombreMatch && centroMatch;
-          };
-        });
+        // Filtro combinado: nombre + centro
+        this.dataSource.filterPredicate = (student, filter) => {
+          const { nombre, centro } = JSON.parse(filter);
+          const nombreMatch = student.name.toLowerCase().includes(nombre);
+          const centroMatch = centro
+            ? student.centro?.toLowerCase().includes(centro)
+            : true;
+          return nombreMatch && centroMatch;
+        };
+      });
     }
   }
 

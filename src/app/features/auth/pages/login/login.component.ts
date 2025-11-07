@@ -6,10 +6,10 @@ import { AuthService } from 'src/app/core/auth/services/auth.service';
 
 @Component({
   selector: 'app-login',
-    standalone: true,
+  standalone: true,
   imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginPage {
   username = '';
