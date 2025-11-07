@@ -1,1 +1,8 @@
-<app-student-form (formSubmitted)="onSubmit($event)"></app-student-form>
+<h2>📝 Registro de Estudiante</h2>
+
+<app-student-form
+  [isEditMode]="false"
+  [isAdmin]="isAdmin"
+  (formSubmitted)="onSubmit($event)" 
+></app-student-form>
+

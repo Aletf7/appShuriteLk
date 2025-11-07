@@ -43,6 +43,25 @@
     }
   }
 }
+.file-field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+
+  label {
+    font-weight: 500;
+    margin-bottom: 0.3rem;
+    color: #555;
+  }
+
+  input[type="file"] {
+    border: 1px solid #ccc;
+    padding: 0.5rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+  }
+}
+
 
 // Responsive para móvil
 @media (max-width: 768px) {

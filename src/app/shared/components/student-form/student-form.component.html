@@ -1,20 +1,24 @@
-<h2>📝 Registro de Estudiante</h2>
-
 <form [formGroup]="form" (ngSubmit)="submit()" class="student-form">
   <!-- 🧍 Datos del estudiante -->
   <mat-form-field appearance="outline">
     <mat-label>Nombre</mat-label>
-    <input matInput formControlName="nombre" />
+    <input matInput formControlName="name" />
   </mat-form-field>
 
   <mat-form-field appearance="outline">
     <mat-label>Apellidos</mat-label>
-    <input matInput formControlName="apellidos" />
+    <input matInput formControlName="surname" />
   </mat-form-field>
 
   <mat-form-field appearance="outline">
     <mat-label>Fecha de nacimiento</mat-label>
-    <input matInput formControlName="fechaNacimiento" type="date" />
+    <input
+      matInput
+      [matDatepicker]="picker"
+      formControlName="fechaNacimiento"
+    />
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
 
   <mat-form-field appearance="outline">
@@ -61,11 +65,28 @@
     <mat-label>Nº licencia federativa</mat-label>
     <input matInput formControlName="licenciaFederativa" />
   </mat-form-field>
+  <!-- Solo visible para administradores -->
+  <div *ngIf="isAdmin">
+    <!-- Selector de cinturón -->
+    <mat-form-field appearance="outline">
+      <mat-label>Cinturón</mat-label>
+      <mat-select formControlName="belt">
+        <mat-option *ngFor="let b of belt" [value]="b">{{ b }}</mat-option>
+      </mat-select>
+    </mat-form-field>
 
-  <mat-form-field appearance="outline">
-    <mat-label>Fotografía</mat-label>
-    <input matInput formControlName="fotografia" type="file" />
-  </mat-form-field>
+    <!-- Verificación del usuario -->
+    <mat-checkbox formControlName="isTrusted">Usuario verificado</mat-checkbox>
+  </div>
+
+  <div class="file-field">
+    <label for="fotografia">Fotografía</label>
+    <input
+      type="file"
+      id="fotografia"
+      (change)="onFileChange($event, 'fotografia')"
+    />
+  </div>
 
   <!-- 👶 Menor de edad -->
   <mat-checkbox formControlName="menorEdad">¿Es menor de edad?</mat-checkbox>
@@ -124,15 +145,23 @@
       <textarea matInput formControlName="informacionAdicional"></textarea>
     </mat-form-field>
 
-    <mat-form-field appearance="outline">
-      <mat-label>NIF/NIE anverso</mat-label>
-      <input matInput formControlName="nifAnverso" type="file" />
-    </mat-form-field>
+    <div class="file-field">
+      <label for="nifAnverso">NIF/NIE anverso</label>
+      <input
+        type="file"
+        id="nifAnverso"
+        (change)="onFileChange($event, 'nifAnverso', tutorGroup)"
+      />
+    </div>
 
-    <mat-form-field appearance="outline">
-      <mat-label>NIF/NIE reverso</mat-label>
-      <input matInput formControlName="nifReverso" type="file" />
-    </mat-form-field>
+    <div class="file-field">
+      <label for="nifReverso">NIF/NIE reverso</label>
+      <input
+        type="file"
+        id="nifReverso"
+        (change)="onFileChange($event, 'nifReverso', tutorGroup)"
+      />
+    </div>
   </div>
 
   <!-- 📜 Cláusulas legales -->
@@ -143,11 +172,17 @@
   <mat-checkbox formControlName="clausula4">Acepto la cláusula 4</mat-checkbox>
 
   <!-- ✅ Botón de registro -->
-  <button mat-raised-button color="primary" type="submit">Registrarse</button>
+  <div class="form-actions">
+    <button mat-raised-button color="primary" (click)="submit()">
+      {{ isEditMode ? "Guardar" : "Registrarse" }}
+    </button>
 
-  <!-- 🔗 Enlace al login -->
-  <p style="margin-top: 1rem;">
-    ¿Ya tienes una cuenta?
-    <a routerLink="/login">Inicia sesión</a>
-  </p>
+    <button
+      mat-button
+      color="warn"
+      [routerLink]="isEditMode ? '/students' : '/login'"
+    >
+      {{ isEditMode ? "Cancelar" : "Iniciar sesión" }}
+    </button>
+  </div>
 </form>

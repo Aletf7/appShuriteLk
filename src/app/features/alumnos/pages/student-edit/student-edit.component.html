@@ -1,59 +1,8 @@
-<h2>✏️ Editar Perfil del Estudiante</h2>
-<button mat-icon-button routerLink="/admin" matTooltip="Volver">
-  <mat-icon>arrow_back</mat-icon>
-</button>
+<h2>🛠️ Editar Estudiante</h2>
+<app-student-form
+  [isEditMode]="true"
+  [isAdmin]="isAdmin"
+  [initialData]="initialData"
+  (formSubmitted)="onSubmit($event)"
+></app-student-form>
 
-<form
-  *ngIf="studentForm"
-  [formGroup]="studentForm"
-  (ngSubmit)="submit()"
-  class="edit-form"
->
-  <mat-form-field appearance="outline">
-    <mat-label>Nombre</mat-label>
-    <input matInput formControlName="name" />
-  </mat-form-field>
-
-  <mat-form-field appearance="outline">
-    <mat-label>Edad</mat-label>
-    <input matInput type="number" formControlName="age" />
-  </mat-form-field>
-
-  <mat-form-field appearance="outline">
-    <mat-label>Cinturón</mat-label>
-    <mat-select formControlName="belt">
-      <mat-option value="White">Blanco</mat-option>
-      <mat-option value="Yellow">Amarillo</mat-option>
-      <mat-option value="Green">Verde</mat-option>
-      <mat-option value="Blue">Azul</mat-option>
-      <mat-option value="Brown">Marrón</mat-option>
-      <mat-option value="Black">Negro</mat-option>
-    </mat-select>
-  </mat-form-field>
-
-  <label for="fileUpload" class="upload-button">
-    <button mat-raised-button color="accent" type="button">
-      <mat-icon>upload</mat-icon> Seleccionar imagen
-    </button>
-  </label>
-  <input
-    id="fileUpload"
-    type="file"
-    (change)="onFileChange($event)"
-    accept="image/*"
-    hidden
-  />
-
-  <div *ngIf="previewUrl" class="preview">
-    <img [src]="previewUrl" alt="Vista previa" />
-  </div>
-
-  <button
-    mat-raised-button
-    color="primary"
-    type="submit"
-    [disabled]="studentForm.invalid"
-  >
-    Guardar cambios
-  </button>
-</form>

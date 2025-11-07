@@ -1,12 +1,16 @@
 {
-  "students": [
+  "users": [
     {
       "name": "Pepe",
       "age": 20,
       "belt": "Blue",
       "imageUrl": "assets/images/il_fullxfull.4480944190_9n3l.avif",
       "id": 1,
-      "videosVistos": [3, 5, 7]
+      "videosVistos": [
+        3,
+        5,
+        7
+      ]
     },
     {
       "id": 2,
@@ -14,7 +18,9 @@
       "age": 22,
       "belt": "Blue",
       "centro": "Colegio San Miguel",
-      "videosVistos": [3],
+      "videosVistos": [
+        3
+      ],
       "imageUrl": "https://thafd.bing.com/th/id/OIP.NRgJJNrJhlvqRpWFwurtHQHaHa?w=171&h=182&c=7&r=0&o=5&pid=1.7"
     },
     {
@@ -23,7 +29,9 @@
       "age": 22,
       "belt": "White",
       "centro": "Colegio María Antoñeta",
-      "videosVistos": [7],
+      "videosVistos": [
+        7
+      ],
       "imageUrl": "https://thafd.bing.com/th/id/OIP.NRgJJNrJhlvqRpWFwurtHQHaHa?w=171&h=182&c=7&r=0&o=5&pid=1.7"
     },
     {
@@ -32,16 +40,203 @@
       "age": 22,
       "belt": "Red",
       "centro": "Colegio María Antoñeta",
-      "videosVistos": [1],
+      "videosVistos": [
+        1
+      ],
       "imageUrl": "https://thafd.bing.com/th/id/OIP.NRgJJNrJhlvqRpWFwurtHQHaHa?w=171&h=182&c=7&r=0&o=5&pid=1.7"
     },
     {
-      "username": "asdasd",
-      "name": "asdasd",
-      "role": "student",
-      "belt": "blanco",
-      "centro": "LutherKing",
-      "id": 5
+      "name": "ale",
+      "surname": "asda",
+      "fechaNacimiento": "1994-12-08",
+      "dni": "66666666",
+      "pasaporte": "5654644654646",
+      "telefono": "666666666",
+      "correo": "a@a.com",
+      "club": "shurite",
+      "identificador": "12356",
+      "informacionAdicional": "asdasd",
+      "actividad": "asdasd",
+      "licenciaFederativa": "311231321",
+      "fotografia": "",
+      "menorEdad": false,
+      "tutor": {
+        "nombre": "",
+        "apellidos": "",
+        "dni": "",
+        "telefono": "",
+        "correo": "",
+        "direccion": "",
+        "poblacion": "",
+        "cp": "",
+        "provincia": "",
+        "informacionAdicional": "",
+        "nifAnverso": "",
+        "nifReverso": ""
+      },
+      "clausula1": true,
+      "clausula2": true,
+      "clausula3": true,
+      "clausula4": true,
+      "id": 7,
+      "isTrusted": true,
+      "belt": "Verde",
+      "age": 30
+    },
+    {
+      "isTrusted": true,
+      "activo": false,
+      "role": "user",
+      "id": 8,
+      "name": "pedro",
+      "surname": "benitez",
+      "fechaNacimiento": "1992-06-08T23:00:00.000Z",
+      "dni": "65565656j",
+      "pasaporte": "54564654654",
+      "telefono": "696569575",
+      "correo": "nino@brarlo.com",
+      "club": "shurite",
+      "identificador": "15954",
+      "informacionAdicional": "soy una prueba",
+      "actividad": "karatekid",
+      "licenciaFederativa": "123456aaa",
+      "fotografia": "",
+      "belt": "Verde",
+      "menorEdad": false,
+      "tutor": {
+        "nombre": "",
+        "apellidos": "",
+        "dni": "",
+        "telefono": "",
+        "correo": "",
+        "direccion": "",
+        "poblacion": "",
+        "cp": "",
+        "provincia": "",
+        "informacionAdicional": "",
+        "nifAnverso": "",
+        "nifReverso": ""
+      },
+      "clausula1": true,
+      "clausula2": true,
+      "clausula3": true,
+      "clausula4": true,
+      "age": 33
+    },
+    {
+      "isTrusted": true,
+      "activo": false,
+      "role": "user",
+      "id": 9
+    },
+    {
+      "isTrusted": true,
+      "activo": false,
+      "role": "user",
+      "id": 10
+    },
+    {
+      "isTrusted": true,
+      "activo": false,
+      "role": "user",
+      "id": 11
+    },
+    {
+      "isTrusted": true,
+      "activo": false,
+      "role": "user",
+      "id": 12
+    },
+    {
+      "isTrusted": false,
+      "role": "user",
+      "id": 13
+    },
+    {
+      "isTrusted": false,
+      "role": "user",
+      "id": 14
+    },
+    {
+      "isTrusted": false,
+      "role": "user",
+      "id": 15
+    },
+    {
+      "name": "asdasdasd",
+      "surname": "asdasdasd",
+      "fechaNacimiento": "2000-12-02",
+      "dni": "56464654",
+      "pasaporte": "4654654564",
+      "telefono": "54646546465",
+      "correo": "a@a.com",
+      "club": "asdasd",
+      "identificador": "545644",
+      "informacionAdicional": "asdasdda",
+      "actividad": "465465456",
+      "licenciaFederativa": "asda65465465",
+      "fotografia": "",
+      "belt": "",
+      "isTrusted": false,
+      "menorEdad": false,
+      "tutor": {
+        "nombre": "",
+        "apellidos": "",
+        "dni": "",
+        "telefono": "",
+        "correo": "",
+        "direccion": "",
+        "poblacion": "",
+        "cp": "",
+        "provincia": "",
+        "informacionAdicional": "",
+        "nifAnverso": "",
+        "nifReverso": ""
+      },
+      "clausula1": true,
+      "clausula2": true,
+      "clausula3": true,
+      "clausula4": true,
+      "role": "user",
+      "id": 16
+    },
+    {
+      "name": "asdasdasd",
+      "surname": "asdasdasd",
+      "fechaNacimiento": "2000-12-02",
+      "dni": "56464654",
+      "pasaporte": "4654654564",
+      "telefono": "54646546465",
+      "correo": "a@a.com",
+      "club": "asdasd",
+      "identificador": "545644",
+      "informacionAdicional": "asdasdda",
+      "actividad": "465465456",
+      "licenciaFederativa": "asda65465465",
+      "fotografia": "",
+      "belt": "Azul",
+      "isTrusted": true,
+      "menorEdad": false,
+      "tutor": {
+        "nombre": "",
+        "apellidos": "",
+        "dni": "",
+        "telefono": "",
+        "correo": "",
+        "direccion": "",
+        "poblacion": "",
+        "cp": "",
+        "provincia": "",
+        "informacionAdicional": "",
+        "nifAnverso": "",
+        "nifReverso": ""
+      },
+      "clausula1": true,
+      "clausula2": true,
+      "clausula3": true,
+      "clausula4": true,
+      "role": "user",
+      "id": 17
     }
   ],
   "videos": [

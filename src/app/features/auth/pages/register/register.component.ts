@@ -12,12 +12,14 @@ import { RouterModule, Router } from '@angular/router';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent {
+  isAdmin = false;
   constructor(private http: HttpClient, private router: Router) {}
 
   onSubmit(data: any): void {
+    console.log('Datos recibidos en register:', data);
     const nuevoUsuario = {
       ...data,
-      activo: false, // El admin debe activarlo manualmente
+      isTrusted: false, // El admin debe activarlo manualmente
       role: 'user'
     };
 
