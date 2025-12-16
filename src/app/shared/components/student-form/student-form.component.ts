@@ -5,6 +5,8 @@ import {
   EventEmitter,
   OnChanges,
   SimpleChanges,
+  signal,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
@@ -12,7 +14,11 @@ import {
   FormBuilder,
   FormGroup,
   Validators,
+  FormControl,
+  FormsModule,
 } from '@angular/forms';
+
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
@@ -23,12 +29,14 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 
 import { AuthService } from 'src/app/core/auth/services/auth.service';
+import { merge } from 'rxjs';
 
 @Component({
   selector: 'app-student-form',
   standalone: true,
   imports: [
     CommonModule,
+    FormsModule,
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
@@ -39,6 +47,7 @@ import { AuthService } from 'src/app/core/auth/services/auth.service';
     MatDatepickerModule,
     MatNativeDateModule,
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './student-form.component.html',
   styleUrls: ['./student-form.component.scss'],
 })
@@ -47,22 +56,47 @@ export class StudentFormComponent implements OnChanges {
   @Input() isEditMode = false;
   @Input() isAdmin = false;
   @Output() formSubmitted = new EventEmitter<any>();
+  readonly email = new FormControl('', [Validators.required, Validators.email]);
+
+  errorMessage = signal('');
 
   form: FormGroup;
+    club: string[] = [
+    'Club Deportivo Shutite-LK',
+    'Colegio Buen Consejo La Laguna',
+    'Colegio Luther King La Laguna',
+    'Colegio Luther King San Miguel',
+    'Colegio Luther King Arafo',
+  ];
 
   belt: string[] = [
     'Blanco',
+    'Blanco-Amarillo',
     'Amarillo',
+    'Amarillo-Naranja',
     'Naranja',
+    'Naranja-Verde',
     'Verde',
+    'Verde-Azul',
     'Azul',
+    'Azul-Marrón',
     'Marrón',
     'Negro',
+    'Negro 1ºDAN',
+    'Negro 2ºDAN',
+    'Negro 3ºDAN',
+    'Negro 4ºDAN',
+    'Negro 5ºDAN',
+    'Negro 6ºDAN'
   ];
 
   constructor(private fb: FormBuilder, private auth: AuthService) {
     this.form = this.createForm();
+    merge(this.email.statusChanges, this.email.valueChanges)
+      .pipe(takeUntilDestroyed())
+      .subscribe(() => this.updateErrorMessage());
   }
+  
   ngOnInit() {
     this.isAdmin = this.auth.getRole() === 'admin'; // Asegúrate de tener AuthService inyectado
     if (this.initialData) {
@@ -90,11 +124,9 @@ export class StudentFormComponent implements OnChanges {
       dni: [''],
       pasaporte: [''],
       telefono: ['', Validators.required],
-      correo: ['', [Validators.required, Validators.email]],
+      email: ['', [Validators.required, Validators.email]],
       club: [''],
-      identificador: [''],
       informacionAdicional: [''],
-      actividad: [''],
       licenciaFederativa: [''],
       fotografia: [''],
       belt: [''],
@@ -156,5 +188,15 @@ submit(): void {
     this.formSubmitted.emit(formData);
   }
 }
+
+  updateErrorMessage() {
+    if (this.email.hasError('required')) {
+      this.errorMessage.set('You must enter a value');
+    } else if (this.email.hasError('email')) {
+      this.errorMessage.set('Not a valid email');
+    } else {
+      this.errorMessage.set('');
+    }
+  }
 
 }

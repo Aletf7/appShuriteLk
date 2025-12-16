@@ -36,6 +36,16 @@
     <mat-cell *matCellDef="let student">{{ student.name }}</mat-cell>
   </ng-container>
 
+    <ng-container matColumnDef="surname">
+    <mat-header-cell *matHeaderCellDef>Apellido</mat-header-cell>
+    <mat-cell *matCellDef="let student">{{ student.surname }}</mat-cell>
+  </ng-container>
+
+    <ng-container matColumnDef="club">
+    <mat-header-cell *matHeaderCellDef>Centro</mat-header-cell>
+    <mat-cell *matCellDef="let student">{{ student.club }}</mat-cell>
+  </ng-container>
+
   <ng-container matColumnDef="age">
     <mat-header-cell *matHeaderCellDef>Edad</mat-header-cell>
     <mat-cell *matCellDef="let student">{{ student.age }} años</mat-cell>
