@@ -37,11 +37,25 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrls: ['./students-list.component.scss'],
 })
 export class StudentsListComponent implements OnInit {
-  displayedColumns: string[] = ['name', 'age', 'belt', 'visto', 'actions'];
+  displayedColumns: string[] = [
+    'name',
+    'surname',
+    'club',
+    'age',
+    'belt',
+    'visto',
+    'actions',
+  ];
 
   dataSource = new MatTableDataSource<any>([]);
   isAdmin = false;
-  centros: string[] = ['Colegio San Miguel', 'Colegio María Antoñeta'];
+  centros: string[] = [
+    'Club Deportivo Shutite-LK',
+    'Colegio Buen Consejo La Laguna',
+    'Colegio Luther King La Laguna',
+    'Colegio Luther King San Miguel',
+    'Colegio Luther King Arafo',
+  ];
   nombreFiltro: string = '';
   centroSeleccionado: string = '';
   videoId: number = 5; // Puedes cambiarlo dinámicamente si lo necesitas

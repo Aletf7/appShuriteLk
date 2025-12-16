@@ -29,12 +29,23 @@ export class StudentEditComponent {
   isAdmin = false;
   belts: string[] = [
     'Blanco',
+    'Blanco-Amarillo',
     'Amarillo',
+    'Amarillo-Naranja',
     'Naranja',
+    'Naranja-Verde',
     'Verde',
+    'Verde-Azul',
     'Azul',
+    'Azul-Marrón',
     'Marrón',
     'Negro',
+    'Negro 1ºDAN',
+    'Negro 2ºDAN',
+    'Negro 3ºDAN',
+    'Negro 4ºDAN',
+    'Negro 5ºDAN',
+    'Negro 6ºDAN',
   ];
 
   ngOnInit() {

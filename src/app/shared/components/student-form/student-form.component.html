@@ -38,27 +38,28 @@
 
   <mat-form-field appearance="outline">
     <mat-label>Correo electrónico</mat-label>
-    <input matInput formControlName="correo" type="email" />
+        <input
+      matInput
+      placeholder="pat@example.com"
+      formControlName="email"
+      (blur)="updateErrorMessage()"
+      required
+    />
+    @if (email.invalid) {
+      <mat-error>{{errorMessage()}}</mat-error>
+    }
   </mat-form-field>
 
   <mat-form-field appearance="outline">
     <mat-label>Club</mat-label>
-    <input matInput formControlName="club" />
-  </mat-form-field>
-
-  <mat-form-field appearance="outline">
-    <mat-label>Identificador</mat-label>
-    <input matInput formControlName="identificador" />
+          <mat-select formControlName="club">
+        <mat-option *ngFor="let c of club" [value]="c">{{ c }}</mat-option>
+      </mat-select>
   </mat-form-field>
 
   <mat-form-field appearance="outline">
     <mat-label>Información adicional</mat-label>
     <textarea matInput formControlName="informacionAdicional"></textarea>
-  </mat-form-field>
-
-  <mat-form-field appearance="outline">
-    <mat-label>Actividad</mat-label>
-    <input matInput formControlName="actividad" />
   </mat-form-field>
 
   <mat-form-field appearance="outline">
