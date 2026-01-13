@@ -70,26 +70,31 @@ export class StudentsListComponent implements OnInit {
     private dialog: MatDialog
   ) {}
 
-  ngOnInit(): void {
-    this.isAdmin = this.auth.getRole() === 'admin';
+ ngOnInit(): void {
+  this.isAdmin = this.auth.getRole() === 'admin';
 
-    if (this.isAdmin) {
-      this.http.get<any[]>('http://localhost:3000/users').subscribe((data) => {
-        this.dataSource.data = data;
-        this.dataSource.paginator = this.paginator;
+  if (this.isAdmin) {
+    this.http.get<any[]>('http://localhost:3000/users').subscribe((data) => {
+      this.dataSource.data = data;
+      this.dataSource.paginator = this.paginator;
 
-        // Filtro combinado: nombre + centro
-        this.dataSource.filterPredicate = (student, filter) => {
-          const { nombre, centro } = JSON.parse(filter);
-          const nombreMatch = student.name.toLowerCase().includes(nombre);
-          const centroMatch = centro
-            ? student.centro?.toLowerCase().includes(centro)
-            : true;
-          return nombreMatch && centroMatch;
-        };
-      });
-    }
+      // Filtro combinado: nombre + centro (con protección contra undefined)
+      this.dataSource.filterPredicate = (student, filter) => {
+        const { nombre, centro } = JSON.parse(filter);
+
+        // Normalizamos valores para evitar errores
+        const studentName = (student.name || '').toLowerCase();
+        const studentCentro = (student.centro || '').toLowerCase();
+
+        const nombreMatch = studentName.includes(nombre || '');
+        const centroMatch = centro ? studentCentro.includes(centro) : true;
+
+        return nombreMatch && centroMatch;
+      };
+    });
   }
+}
+
 
   applyFilter(event: Event): void {
     const filterValue = (event.target as HTMLInputElement).value
