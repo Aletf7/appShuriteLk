@@ -1,6 +1,6 @@
 {
   "apphosting": {
-    "backendId": "shuriteback",
+    "backendId": "shurite-backend",
     "rootDir": "src",
     "ignore": [
       "node_modules",
