@@ -124,45 +124,6 @@
       "age": 33
     },
     {
-      "isTrusted": true,
-      "activo": false,
-      "role": "user",
-      "id": 9
-    },
-    {
-      "isTrusted": true,
-      "activo": false,
-      "role": "user",
-      "id": 10
-    },
-    {
-      "isTrusted": true,
-      "activo": false,
-      "role": "user",
-      "id": 11
-    },
-    {
-      "isTrusted": true,
-      "activo": false,
-      "role": "user",
-      "id": 12
-    },
-    {
-      "isTrusted": false,
-      "role": "user",
-      "id": 13
-    },
-    {
-      "isTrusted": false,
-      "role": "user",
-      "id": 14
-    },
-    {
-      "isTrusted": false,
-      "role": "user",
-      "id": 15
-    },
-    {
       "name": "asdasdasd",
       "surname": "asdasdasd",
       "fechaNacimiento": "2000-12-02",
